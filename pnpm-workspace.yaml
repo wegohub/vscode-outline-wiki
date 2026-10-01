@@ -1,0 +1,16 @@
+# pnpm 的设置在 v11+ 统一放在这里（package.json 里的 "pnpm" 字段已不再被读取）
+
+# 需要放行构建脚本的依赖：
+#   esbuild       —— 安装平台原生二进制（构建需要）
+#   @vscode/vsce-sign —— vsce 打包时的签名辅助工具
+allowBuilds:
+  esbuild: true
+  '@vscode/vsce-sign': true
+
+# 已归档的 rich-markdown-editor@11.21.3 把所有 prosemirror-* 声明为 ^ 范围，
+# 而它自己把 prosemirror-view / prosemirror-transform 钉成精确版本。
+# 我们的扩展也会 import prosemirror-state / prosemirror-view，
+# 必须保证整个依赖图里只有一份实例，否则 PluginKey 身份与 instanceof 检查会静默失效。
+overrides:
+  prosemirror-view: 1.18.1
+  prosemirror-transform: 1.2.5

@@ -1,0 +1,33 @@
+{
+  "at": "2026-09-30T19:00:03.692Z",
+  "vscodeVersion": "1.140.0",
+  "docRel": ".metadata/docs/src/hello.go.wiki.md",
+  "fixtureRel": ".metadata/static/__probe__",
+  "results": [
+    {
+      "name": "editorMounted",
+      "ok": true,
+      "detail": "ProseMirror 已渲染，文本长度 25"
+    },
+    {
+      "name": "baseResolution",
+      "ok": true,
+      "detail": "相对链接 ../../static/__probe__/probe.png 解析为 https://file+.vscode-resource.vscode-cdn.net/workspace/vscode-outline-wiki/test/fixtures/workspace/.metadata/static/__probe__/probe.png，尺寸 1x1"
+    },
+    {
+      "name": "mediaRangeSeek",
+      "ok": true,
+      "detail": "时长 2.00s，seek→1.20s（目标 1.20s），buffered 段数 1"
+    },
+    {
+      "name": "codecSupport",
+      "ok": true,
+      "detail": "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\" → probably\nvideo/mp4; codecs=\"hvc1.1.6.L93.B0\" → probably\nvideo/webm; codecs=\"vp9, opus\" → probably\nvideo/webm; codecs=\"av01.0.05M.08\" → probably\naudio/wav → maybe\naudio/mpeg → probably\naudio/flac → probably\naudio/ogg; codecs=\"opus\" → probably\nvideo/x-matroska; codecs=\"avc1.42E01E\" → probably"
+    },
+    {
+      "name": "binaryPostMessage",
+      "ok": true,
+      "detail": "host→webview 直传 Uint8Array 成功；入库实现优先走二进制，base64 作为回退"
+    }
+  ]
+}

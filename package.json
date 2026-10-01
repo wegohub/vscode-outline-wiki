@@ -1,0 +1,382 @@
+{
+  "name": "outline-wiki",
+  "displayName": "Outline Wiki",
+  "description": "工作区里每个文件对应一篇由 Outline 编辑器撰写的 Wiki 文档；文档与索引进 git，静态资源放 .metadata/static/ 由网盘同步。",
+  "version": "0.3.3",
+  "publisher": "wegohub",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "vscode": "^1.138.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "wiki",
+    "markdown",
+    "outline",
+    "notes",
+    "documentation"
+  ],
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "workspaceContains:__autoprobe__.json",
+    "onView:outlineWiki.currentFile"
+  ],
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "outlineWiki.wikiDoc",
+        "displayName": "Wiki 文档（Outline 编辑器）",
+        "selector": [
+          {
+            "filenamePattern": "**/*.wiki.md"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "outlineWiki.openDoc",
+        "title": "打开当前文件的 Wiki 侧边栏",
+        "category": "Outline Wiki",
+        "icon": "$(book)"
+      },
+      {
+        "command": "outlineWiki.openSource",
+        "title": "打开对应源文件",
+        "category": "Outline Wiki",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "outlineWiki.openDocFromTree",
+        "title": "打开文档",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.newPage",
+        "title": "新建独立 Wiki 页",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.insertMedia",
+        "title": "插入视频/音频（引用 static/ 或导入）",
+        "category": "Outline Wiki",
+        "icon": "$(add)"
+      },
+      {
+        "command": "outlineWiki.insertMediaUrl",
+        "title": "插入播放链接",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.runProbe",
+        "title": "运行 Phase 0 探针（渲染 / <base> / Range / 二进制）",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.openInSystemPlayer",
+        "title": "用系统播放器打开",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.revealDoc",
+        "title": "在访达/资源管理器中显示",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.rebuildIndex",
+        "title": "重建索引（.metadata/index.json）",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.verifyRefs",
+        "title": "检查资源引用（找出缺失文件）",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.gcAssets",
+        "title": "列出未被引用的静态资源（只报告）",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.configGitIgnore",
+        "title": "配置 Git 忽略规则（static/ 不进 git）",
+        "category": "Outline Wiki"
+      },
+      {
+        "command": "outlineWiki.refresh",
+        "title": "刷新 Wiki 视图",
+        "category": "Outline Wiki",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "outlineWiki.toggleMetadataVisibility",
+        "title": "切换元数据目录显示",
+        "category": "Outline Wiki"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "outlineWiki.openDoc",
+        "key": "alt+cmd+w",
+        "mac": "alt+cmd+w",
+        "when": "editorTextFocus || explorerViewletVisible"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "outlineWiki.openDoc",
+          "when": "resourceScheme == file",
+          "group": "navigation@9"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "outlineWiki.openDoc",
+          "when": "resourceScheme == file",
+          "group": "navigation@9"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "outlineWiki.openDocFromTree",
+          "when": "false"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "outlineWiki.insertMedia",
+          "when": "view == outlineWiki.currentFile",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "secondarySidebar": [
+        {
+          "id": "outlineWiki",
+          "title": "Outline Wiki",
+          "icon": "media/icons/wiki.svg"
+        }
+      ]
+    },
+    "views": {
+      "outlineWiki": [
+        {
+          "id": "outlineWiki.currentFile",
+          "name": "Outline Wiki",
+          "type": "webview"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Outline Wiki",
+      "properties": {
+        "outlineWiki.metadataDir": {
+          "type": "string",
+          "default": ".metadata",
+          "scope": "resource",
+          "description": "元数据根目录（相对工作区根）。"
+        },
+        "outlineWiki.docsDir": {
+          "type": "string",
+          "default": "docs",
+          "scope": "resource",
+          "description": "元数据下存放 Wiki 文档的目录名（进 git）。"
+        },
+        "outlineWiki.staticDir": {
+          "type": "string",
+          "default": "static",
+          "scope": "resource",
+          "description": "元数据下存放静态资源的目录名（不进 git，走网盘同步）。"
+        },
+        "outlineWiki.excludeGlobs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "**/node_modules/**",
+            "**/.git/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/out/**",
+            "**/.metadata/**"
+          ],
+          "description": "这些路径的文件不会被提供 Wiki 文档。",
+          "scope": "resource"
+        },
+        "outlineWiki.autoCreateOnOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "打开文件时若没有 Wiki 文档则自动创建。",
+          "scope": "resource"
+        },
+        "outlineWiki.openBeside": {
+          "type": "boolean",
+          "default": true,
+          "description": "在旁侧打开 Wiki 文档，保留源文件可见。",
+          "scope": "resource"
+        },
+        "outlineWiki.static.dateTimezone": {
+          "type": "string",
+          "enum": [
+            "local",
+            "utc"
+          ],
+          "default": "local",
+          "description": "static/upload 日期目录使用本地时区还是 UTC。",
+          "scope": "resource"
+        },
+        "outlineWiki.static.maxInlineUploadMB": {
+          "type": "number",
+          "default": 16,
+          "description": "粘贴/拖入文件的最大体积（MB）。超过请直接放入 .metadata/static/ 再引用。",
+          "scope": "resource"
+        },
+        "outlineWiki.static.warnSizeMB": {
+          "type": "number",
+          "default": 50,
+          "description": "超过该体积时提示大文件注意事项（MB）。",
+          "scope": "resource"
+        },
+        "outlineWiki.static.allowedExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "png",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp",
+            "avif",
+            "bmp",
+            "svg",
+            "mp4",
+            "m4v",
+            "mov",
+            "webm",
+            "mkv",
+            "avi",
+            "mp3",
+            "m4a",
+            "aac",
+            "wav",
+            "flac",
+            "ogg",
+            "opus",
+            "pdf",
+            "zip",
+            "docx",
+            "xlsx",
+            "pptx",
+            "csv",
+            "txt"
+          ],
+          "description": "允许入库的文件扩展名（不含点，小写）。",
+          "scope": "resource"
+        },
+        "outlineWiki.static.dedupeByContent": {
+          "type": "boolean",
+          "default": false,
+          "description": "开启后，同一天目录内内容相同的文件会被复用（默认不做内容去重）。",
+          "scope": "resource"
+        },
+        "outlineWiki.media.allowVideo": {
+          "type": "boolean",
+          "default": true,
+          "description": "允许播放外部 http(s) 视频链接（会放宽 webview 的 media-src）。",
+          "scope": "resource"
+        },
+        "outlineWiki.editor.theme": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "light",
+            "dark"
+          ],
+          "default": "auto",
+          "description": "Wiki 编辑器主题。",
+          "scope": "resource"
+        },
+        "outlineWiki.editor.fontSize": {
+          "type": "number",
+          "default": 16,
+          "description": "Wiki 编辑器正文字号（px）。",
+          "scope": "resource"
+        },
+        "outlineWiki.math.rejectNumericOnly": {
+          "type": "boolean",
+          "default": true,
+          "description": "把 $5 and $6、$1,000 这类纯数字内容视为普通文本，避免货币被误判成公式。",
+          "scope": "resource"
+        },
+        "outlineWiki.hideMetadataFolder": {
+          "type": "boolean",
+          "default": false,
+          "description": "把元数据目录加入 files.exclude（注意：这也会让它从搜索和全局匹配中消失）。",
+          "scope": "resource"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "check-types": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.webview.json --noEmit",
+    "build": "node esbuild.mjs",
+    "compile": "pnpm run check-types && pnpm run build && node scripts/check-single-prosemirror.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "node esbuild.mjs --tests && node scripts/run-integration.mjs",
+    "vscode:prepublish": "node esbuild.mjs --production && node scripts/check-single-prosemirror.mjs",
+    "package": "npx --yes @vscode/vsce package --no-dependencies --allow-missing-repository"
+  },
+  "dependencies": {
+    "katex": "^0.16.22",
+    "outline-icons": "^1.42.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "rich-markdown-editor": "11.21.3",
+    "styled-components": "^5.3.11"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/mocha": "^10.0.10",
+    "@types/react": "^17.0.83",
+    "@types/react-dom": "^17.0.25",
+    "@types/vscode": "^1.138.0",
+    "@types/vscode-webview": "^1.57.5",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "jsdom": "^26.0.0",
+    "mermaid": "^11.6.0",
+    "mocha": "^11.0.1",
+    "prosemirror-inputrules": "^1.2.0",
+    "prosemirror-keymap": "^1.1.4",
+    "prosemirror-model": "^1.13.3",
+    "prosemirror-state": "^1.3.4",
+    "prosemirror-transform": "1.2.5",
+    "prosemirror-view": "1.18.1",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wegohub/vscode-outline-wiki.git"
+  },
+  "homepage": "https://github.com/wegohub/vscode-outline-wiki#readme",
+  "bugs": {
+    "url": "https://github.com/wegohub/vscode-outline-wiki/issues"
+  }
+}

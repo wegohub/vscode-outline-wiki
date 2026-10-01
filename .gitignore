@@ -1,0 +1,41 @@
+node_modules/
+dist/
+out/
+out-tsc/
+*.vsix
+.vscode-test/
+.DS_Store
+*.log
+
+# 集成测试在夹具工作区里生成的产物
+test/fixtures/workspace/.metadata/
+test/fixtures/workspace/.git/
+test/fixtures/workspace/__autoprobe__.json
+test/fixtures/workspace/__probe-report.json
+
+# 本机配置、凭据与调试产物（示例配置可提交）
+.env
+.env.*
+!.env.example
+!.env.*.example
+.npmrc
+.pnpmrc
+.netrc
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+credentials*.json
+secrets*.json
+coverage/
+*.tsbuildinfo
+*.local
+*.local.*
+.idea/
+.vscode/settings.json
+__autoprobe__.json
+__probe-report*.json
+# 当前项目自己的 Wiki 静态资源；正文和索引仍可提交
+.metadata/static/*
+!.metadata/static/.gitignore

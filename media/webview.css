@@ -1,0 +1,354 @@
+/* Wiki 编辑器外壳样式。
+   只负责外层布局、卡片与滚动条；编辑器正文样式由 rich-markdown-editor 自己注入。 */
+
+:root {
+  --ow-bg: var(--vscode-editor-background, #1e1e1e);
+  --ow-fg: var(--vscode-editor-foreground, #d4d4d4);
+  --ow-border: var(--vscode-panel-border, rgba(128, 128, 128, 0.35));
+  --ow-muted: var(--vscode-descriptionForeground, #9aa0a6);
+  --ow-accent: var(--vscode-textLink-foreground, #3794ff);
+  --ow-warn-bg: var(--vscode-inputValidation-warningBackground, rgba(255, 204, 0, 0.12));
+  --ow-warn-border: var(--vscode-inputValidation-warningBorder, rgba(255, 204, 0, 0.5));
+  --ow-error-bg: var(--vscode-inputValidation-errorBackground, rgba(255, 0, 0, 0.12));
+  --ow-error-border: var(--vscode-inputValidation-errorBorder, rgba(255, 0, 0, 0.5));
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ow-fg);
+  font-family: var(--vscode-font-family, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif);
+}
+
+.ow-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.ow-warn {
+  margin: 10px 16px 0;
+  align-self: flex-start;
+  padding: 2px 8px;
+  color: var(--vscode-editorWarning-foreground, #cca700);
+  background: var(--ow-warn-bg);
+  border: 1px solid var(--ow-warn-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.ow-body {
+  flex: 1;
+  padding: 8px 0 96px;
+}
+
+/* rich-markdown-editor 的容器 */
+.ow-body > .ProseMirror,
+.ow-body .ProseMirror {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------- 卡片 */
+
+.ow-media,
+.ow-file-card,
+.ow-media-fallback {
+  margin: 8px 0;
+  border: 1px solid var(--ow-border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(128, 128, 128, 0.06);
+}
+
+.ow-media-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--ow-border);
+  font-size: 12px;
+}
+
+.ow-media-name,
+.ow-file-name {
+  min-width: 0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ow-media-actions,
+.ow-file-actions {
+  flex: none;
+}
+
+.ow-media video,
+.ow-media audio {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+}
+
+.ow-media-audio audio {
+  background: transparent;
+  padding: 8px;
+}
+
+.ow-media-fallback {
+  padding: 10px 12px;
+  border-color: var(--ow-warn-border);
+  background: var(--ow-warn-bg);
+  font-size: 12px;
+}
+
+.ow-media-fallback-title {
+  font-weight: 600;
+}
+
+.ow-media-fallback-detail {
+  margin-top: 4px;
+  color: var(--ow-muted);
+}
+
+.ow-media-fallback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.ow-media-path {
+  font-size: 11px;
+  color: var(--ow-muted);
+  word-break: break-all;
+}
+
+.ow-file-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.ow-file-badge {
+  flex: none;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(128, 128, 128, 0.2);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* ---------------------------------------------------------------- 公式与 mermaid */
+
+.ow-math {
+  cursor: text;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+.ow-math.is-selected {
+  background: rgba(128, 128, 128, 0.16);
+  outline: 1px solid var(--ow-border);
+}
+
+.ow-math-block {
+  display: block;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.ow-math-render {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.ow-math-editor textarea {
+  width: 100%;
+  min-width: 220px;
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 12px;
+  color: inherit;
+  background: rgba(128, 128, 128, 0.12);
+  border: 1px solid var(--ow-border);
+  border-radius: 4px;
+  padding: 4px 6px;
+  resize: vertical;
+}
+
+.ow-math-error {
+  display: inline-flex;
+  gap: 6px;
+  align-items: baseline;
+  color: var(--vscode-editorWarning-foreground, #cca700);
+}
+
+.ow-math-error em {
+  font-size: 11px;
+  font-style: normal;
+  opacity: 0.8;
+}
+
+.ow-mermaid {
+  margin: 8px 0;
+  padding: 10px;
+  border: 1px solid var(--ow-border);
+  border-radius: 6px;
+  background: rgba(128, 128, 128, 0.05);
+  overflow-x: auto;
+}
+
+.ow-mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.ow-mermaid-loading {
+  color: var(--ow-muted);
+  font-size: 12px;
+}
+
+.ow-mermaid-error {
+  color: var(--vscode-editorWarning-foreground, #cca700);
+  font-size: 12px;
+}
+
+.ow-mermaid-error pre {
+  margin: 4px 0 0;
+  white-space: pre-wrap;
+  font-size: 11px;
+}
+
+/* ---------------------------------------------------------------- 杂项 */
+
+button {
+  font: inherit;
+  color: inherit;
+  background: rgba(128, 128, 128, 0.16);
+  border: 1px solid var(--ow-border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(128, 128, 128, 0.28);
+}
+
+a {
+  color: var(--ow-accent);
+}
+
+.ow-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 60vh;
+  color: var(--ow-muted);
+}
+
+.ow-spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--ow-border);
+  border-top-color: var(--ow-accent);
+  border-radius: 50%;
+  animation: ow-spin 0.8s linear infinite;
+}
+
+@keyframes ow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ow-toasts {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 60%;
+  z-index: 20;
+}
+
+.ow-toast {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--ow-border);
+  background: var(--ow-bg);
+  font-size: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.ow-toast-warn {
+  border-color: var(--ow-warn-border);
+  background: var(--ow-warn-bg);
+}
+
+.ow-toast-error {
+  border-color: var(--ow-error-border);
+  background: var(--ow-error-bg);
+}
+
+.ow-fatal {
+  padding: 16px;
+  font-size: 13px;
+}
+
+.ow-fatal pre {
+  padding: 8px;
+  overflow: auto;
+  border-radius: 4px;
+  background: rgba(128, 128, 128, 0.12);
+}
+
+/* 紧凑侧栏：正文保留编辑控件的位置，色彩随 VS Code 主题。 */
+html { box-sizing: border-box; background: var(--ow-bg); }
+*, *::before, *::after { box-sizing: inherit; }
+body { padding: 0; background: var(--ow-bg); }
+.ow-body { padding: 24px 28px 80px 36px; width: 100%; max-width: 860px; margin: 0 auto; min-width: 0; }
+.ow-body .ProseMirror { font-size: inherit; line-height: 1.75; overflow-wrap: anywhere; }
+.ow-body .ProseMirror h1 { font-size: 1.65em; line-height: 1.3; margin: 0 0 22px; letter-spacing: -.025em; }
+.ow-body .ProseMirror h2 { font-size: 1.3em; line-height: 1.4; margin: 28px 0 12px; }
+.ow-body .ProseMirror h3 { font-size: 1.1em; margin: 24px 0 10px; }
+.ow-body .ProseMirror p { margin: 0 0 14px; }
+.ow-body .ProseMirror pre { padding: 14px; border-radius: 8px; font-size: .85em; max-width: 100%; overflow-x: auto; }
+.ow-body .ProseMirror img { border-radius: 8px; }
+.ow-body .ProseMirror blockquote { border-left: 3px solid var(--ow-accent); padding-left: 14px; }
+.ow-body .ProseMirror .heading-actions { left: -28px; }
+.ow-mermaid { padding: 18px 12px; margin: 12px 0 20px; border-radius: 8px; text-align: center; }
+.ow-math-editor textarea { min-width: 0; }
+.ow-empty { min-height: 100vh; padding: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.ow-empty-icon { width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid var(--ow-border); border-radius: 14px; color: var(--ow-accent); font-size: 26px; margin-bottom: 18px; background: rgba(128,128,128,.06); }
+.ow-empty h2 { font-size: 16px; font-weight: 600; margin: 0 0 10px; }
+.ow-empty p { font-size: 12px; line-height: 1.7; color: var(--ow-muted); max-width: 280px; margin: 0 0 12px; }
+.ow-empty .ow-empty-path { color: var(--ow-fg); overflow-wrap: anywhere; font-family: var(--vscode-editor-font-family, monospace); }
+.ow-primary { margin-top: 8px; padding: 8px 20px; background: var(--vscode-button-background, #007acc); color: var(--vscode-button-foreground, white); border-color: transparent; border-radius: 5px; }
+.ow-primary:hover { background: var(--vscode-button-hoverBackground, #0062a3); }
+button:focus-visible { outline: 1px solid var(--vscode-focusBorder, #007acc); outline-offset: 2px; }
+.ow-toasts { max-width: calc(100% - 24px); }
+@media (max-width: 340px) {
+  .ow-body { padding: 20px 16px 64px 30px; }
+}
+
+.ow-webpage { margin: 16px 0; border: 1px solid var(--ow-border); border-radius: 8px; overflow: hidden; }
+.ow-webpage-head { padding: 8px 12px; display: flex; gap: 12px; justify-content: space-between; font-size: 11px; }
+.ow-webpage-head span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ow-webpage-head a { flex-shrink: 0; }
+.ow-webpage iframe { display: block; width: 100%; height: 420px; border: 0; background: white; }
+
+.ow-video-player { background: var(--ow-bg); }
+.ow-video-player video::-webkit-media-controls-fullscreen-button { display: none; }
+.ow-video-status { padding: 6px 10px; font-size: 12px; color: var(--ow-muted); }

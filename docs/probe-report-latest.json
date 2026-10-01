@@ -1,0 +1,117 @@
+{
+  "at": "2026-10-01T03:21:54.326Z",
+  "vscodeVersion": "1.140.0",
+  "docRel": ".metadata/docs/src/hello.go.wiki.md",
+  "fixtureRel": ".metadata/static/probe-media",
+  "results": [
+    {
+      "name": "editorMounted",
+      "ok": true,
+      "detail": "ProseMirror 已渲染，文本长度 5269"
+    },
+    {
+      "name": "phase4Render",
+      "ok": true,
+      "detail": "KaTeX 节点 2（期望 2，精确相等才说明货币未被误判）、公式错误 0；mermaid 容器 1、SVG 1（期望 1）、错误 0"
+    },
+    {
+      "name": "markdownRoundTrip",
+      "ok": true,
+      "detail": "序列化保留行内公式、块公式、货币和 Mermaid=true；# hello.go\n\n行内公式 $E=mc^2$，货币 $5 and $6 不该被当成公式。\n\n$$\n\\int_0^1 x^2 \\, dx\n$$\n\n```mermaid\ngraph TD\n  A[开始] --> B[结束]\n```\n\n\\\n"
+    },
+    {
+      "name": "ingestRoundTrip",
+      "ok": true,
+      "detail": "入库成功且命名合规（UUID + 日期目录 + 扩展名来自原名）：../../static/upload/2026-10-01/b241a0c5-14b4-4bcf-813a-36e8d1df9975.png"
+    },
+    {
+      "name": "baseResolution",
+      "ok": true,
+      "detail": "相对链接 ../../static/probe-media/probe.png 解析为 https://file+.vscode-resource.vscode-cdn.net/workspace/vscode-outline-wiki/test/fixtures/workspace/.metadata/static/probe-media/probe.png，尺寸 1x1"
+    },
+    {
+      "name": "mediaRangeSeek",
+      "ok": true,
+      "detail": "时长 2.00s，seek→1.20s（目标 1.20s），buffered 段数 1"
+    },
+    {
+      "name": "codecSupport",
+      "ok": true,
+      "detail": "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\" → probably\nvideo/mp4; codecs=\"hvc1.1.6.L93.B0\" → probably\nvideo/webm; codecs=\"vp9, opus\" → probably\nvideo/webm; codecs=\"av01.0.05M.08\" → probably\naudio/wav → maybe\naudio/mpeg → probably\naudio/flac → probably\naudio/ogg; codecs=\"opus\" → probably\nvideo/x-matroska; codecs=\"avc1.42E01E\" → probably"
+    },
+    {
+      "name": "binaryPostMessage",
+      "ok": true,
+      "detail": "host→webview 直传 Uint8Array 成功；二进制通道可用；当前入库实现仍使用 base64"
+    },
+    {
+      "name": "clipboardPasteImage",
+      "ok": true,
+      "detail": "真实 paste 事件后图片已插入并加载=true，没有成功弹窗=true；src=../../static/upload/2026-10-01/8fa51d55-f194-497c-8564-88db4b8a3b5b.png"
+    },
+    {
+      "name": "mediaNodeInsertion",
+      "ok": true,
+      "detail": "宿主插入通道的 embed 节点保留=true，媒体元数据时长=2，Markdown 保留引用=true；#  ![clipboard-probe.png](../../static/upload/2026-10-01/8fa51d55-f194-497c-8564-88db4b8a3b5b.png)\n\n[../../static/probe-media/probe.wav](../../static/probe-media/probe.wav)\n\n# hello.go\n\n行内公式 $E=mc^2$，货币 $5 and $6 不该被当成公式。\n\n$$\n\\int_0^1 x^2 \\, dx\n$$\n\n```mermaid\ngraph TD\n  A[开始] --> B[结束]\n```\n\n\\\n"
+    },
+    {
+      "name": "slashVideoAndWebEmbed",
+      "ok": true,
+      "detail": "/视频菜单=true，/embed地址输入=true，iframe=https://example.org/，子网页消息隔离=true，Markdown保留网页链接=true"
+    },
+    {
+      "name": "nativeVideoAudioControls",
+      "ok": true,
+      "detail": "单个原生 video=true，兼容 MOV 时长=300.2，实际解码音频字节=1413120，跳到120s误差=0s，暂停稳定=true，原生音量=0.25，倍速=1.5，无独立音轨/额外控件=true"
+    },
+    {
+      "name": "localVideoFileImport",
+      "ok": true,
+      "detail": "本机文件导入字节一致=true，UUID日期路径=true；.metadata/static/upload/2026-10-01/c97c4dfa-f7fb-4310-a25c-abaf3f4d76bc.mp4（探针替代系统选文件步骤，不检查夹具视频解码）"
+    }
+  ],
+  "sidebarResults": [
+    {
+      "name": "sidebarExistingWiki",
+      "ok": true,
+      "detail": "{\"type\":\"viewSnapshot\",\"id\":\"1790824908596\",\"sourceRel\":\"src/hello.go\",\"canCreate\":false,\"text\":\"#clipboard-probe.pngprobe.wavVS Code 内置解码器不支持该编码（例如 AC3/DTS 音轨、VC-1/WMV 容器）用系统播放器打开在访达/资源管理器中显示../../static/probe-media/probe.wav#hello.go行内公式 E=mc2，货币 $5 and $6 不该被当成公式。∫01​x2dxNoneBashCSSCC#GoHTMLObjective-CJavaJavaScriptJSONPerlPHPPowershellPythonRubyRustSQLTypeScriptYAMLCopygraph TD\\n  A[开始] --> B[结束]#ow-mermaid-1{font-family:inherit;font-size:16px;fill:#ccc;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#ow-mermaid-1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#ow-mermaid-1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#ow-mermaid-1 .error-icon{fill:#a44141;}#ow-mermaid-1 .error-text{fill:#ddd;stroke:#ddd;}#ow-mermaid-1 .edge-thickness-normal{stroke-width:1px;}#ow-mermaid-1 .edge-thickness-thick{stroke-width:3.5px;}#ow-mermaid-1 .edge-pattern-solid{stroke-dasharray:0;}#ow-mermaid-1 .edge-thickness-invisible{stroke-width:0;fill:none;}#ow-mermaid-1 .edge-pattern-dashed{stroke-dasharray:3;}#ow-mermaid-1 .edge-pattern-dotted{stroke-dasharray:2;}#ow-mermaid-1 .marker{fill:lightgrey;stroke:lightgrey;}#ow-mermaid-1 .marker.cross{stroke:lightgrey;}#ow-mermaid-1 svg{font-family:inherit;font-size:16px;}#ow-mermaid-1 p{margin:0;}#ow-mermaid-1 .label{font-family:inherit;color:#ccc;}#ow-mermaid-1 .cluster-label text{fill:#F9FFFE;}#ow-mermaid-1 .cluster-label span{color:#F9FFFE;}#ow-mermaid-1 .cluster-label span p{background-color:transparent;}#ow-mermaid-1 .label text,#ow-mermaid-1 span{fill:#ccc;color:#ccc;}#ow-mermaid-1 .node rect,#ow-mermaid-1 .node circle,#ow-mermaid-1 .node ellipse,#ow-mermaid-1 .node polygon,#ow-mermaid-1 .node path{fill:#1f2020;stroke:#ccc;stroke-width:1px;}#ow-mermaid-1 .rough-node .label text,#ow-mermaid-1 .node .label text,#ow-mermaid-1 .image-shape .label,#ow-mermaid-1 .icon-shape .label{text-anchor:middle;}#ow-mermaid-1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#ow-mermaid-1 .rough-node .label,#ow-mermaid-1 .node .label,#ow-mermaid-1 .image-shape .label,#ow-mermaid-1 .icon-shape .label{text-align:center;}#ow-mermaid-1 .node.clickable{cursor:pointer;}#ow-mermaid-1 .root .anchor path{fill:lightgrey!important;stroke-width:0;stroke:lightgrey;}#ow-mermaid-1 .arrowheadPath{fill:lightgrey;}#ow-mermaid-1 .edgePaths .path{stroke:lightgrey;stroke-width:1px;}#ow-mermaid-1 .flowchart-link{stroke:lightgrey;fill:none;}#ow-mermaid-1 .edgeLabel{background-color:hsl(0, 0%, 34.4117647059%);text-align:center;}#ow-mermaid-1 .edgeLabel p{background-color:hsl(0, 0%, 34.4117647059%);}#ow-mermaid-1 .edgeLabel rect{opacity:0.5;background-color:hsl(0, 0%, 34.4117647059%);fill:hsl(0, 0%, 34.4117647059%);}#ow-mermaid-1 .labelBkg{background-color:rgba(87.75, 87.75, 87.75, 0.5);}#ow-mermaid-1 .cluster rect{fill:hsl(180, 1.5873015873%, 28.3529411765%);stroke:rgba(255, 255, 255, 0.25);stroke-width:1px;}#ow-mermaid-1 .cluster text{fill:#F9FFFE;}#ow-mermaid-1 .cluster span{color:#F9FFFE;}#ow-mermaid-1 .node .collapsed-indicator{fill:rgba(255, 255, 255, 0.25);stroke:none;opacity:0.6;}#ow-mermaid-1 .node .collapsed-separator{stroke:rgba(255, 255, 255, 0.25);stroke-width:0.75px;}#ow-mermaid-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:hsl(20, 1.5873015873%, 12.3529411765%);border:1px solid rgba(255, 255, 255, 0.25);border-radius:2px;pointer-events:none;z-index:100;}#ow-mermaid-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#ccc;}#ow-mermaid-1 rect.text{fill:none;stroke-width:0;}#ow-mermaid-1 .icon-shape,#ow-mermaid-1 .image-shape{background-color:hsl(0, 0%, 34.4117647059%);text-align:center;}#ow-mermaid-1 .icon-shape p,#ow-mermaid-1 .image-shape p{background-color:hsl(0, 0%, 34.4117647059%);padding:2px;}#ow-mermaid-1 .icon-shape .label rect,#ow-mermaid-1 .image-shape .label rect{opacity:0.5;background-color:hsl(0, 0%, 34.4117647059%);fill:hsl(0, 0%, 34.4117647059%);}#ow-mermaid-1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#ow-mermaid-1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#ow-mermaid-1 .node .neo-node{stroke:#ccc;}#ow-mermaid-1 [data-look=\\\"neo\\\"].node rect,#ow-mermaid-1 [data-look=\\\"neo\\\"].cluster rect,#ow-mermaid-1 [data-look=\\\"neo\\\"].node polygon{stroke:url(#ow-mermaid-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#ow-mermaid-1 [data-look=\\\"neo\\\"].swimlane.cluster rect{filter:none;}#ow-mermaid-1 [data-look=\\\"neo\\\"].node path{stroke:url(#ow-mermaid-1-gradient);stroke-width:1px;}#ow-mermaid-1 [data-look=\\\"neo\\\"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#ow-mermaid-1 [data-look=\\\"neo\\\"].node .neo-line path{stroke:#ccc;filter:none;}#ow-mermaid-1 [data-look=\\\"neo\\\"].node circle{stroke:url(#ow-mermaid-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#ow-mermaid-1 [data-look=\\\"neo\\\"].node circle .state-start{fill:#000000;}#ow-mermaid-1 [data-look=\\\"neo\\\"].icon-shape .icon{fill:url(#ow-mermaid-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#ow-mermaid-1 [data-look=\\\"neo\\\"].icon-shape .icon-neo path{stroke:url(#ow-mermaid-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#ow-mermaid-1 :root{--mermaid-font-family:inherit;}开始结束/视频video.mp4VS Code 内置解码器不支持该编码（例如 AC3/DTS 音轨、VC-1/WMV 容器）用系统播放器打开在访达/资源管理器中显示../../static/probe-media/video.mp4\",\"overflow\":false,\"sessionId\":\"c8c7bf52-1ef5-494f-a6bf-73a92eb3d858\"}"
+    },
+    {
+      "name": "sidebarMissingWiki",
+      "ok": true,
+      "detail": "{\"type\":\"viewSnapshot\",\"id\":\"1790824909633\",\"sourceRel\":\"src/wiki-sidebar-probe.ts\",\"canCreate\":true,\"text\":\"\",\"overflow\":false,\"sessionId\":\"e4b1232c-ded1-4fdb-a69e-0c4deb797766\"}"
+    },
+    {
+      "name": "sidebarCreateWiki",
+      "ok": true,
+      "detail": "{\"type\":\"viewSnapshot\",\"id\":\"1790824910842\",\"sourceRel\":\"src/wiki-sidebar-probe.ts\",\"canCreate\":false,\"text\":\"#wiki-sidebar-probe.ts\",\"overflow\":false,\"sessionId\":\"ef158471-0587-4ab6-ac23-b98531c0e0fd\"}"
+    },
+    {
+      "name": "sidebarRapidSwitch",
+      "ok": true,
+      "detail": "原文档已保存=true，当前源文件=src/hello.go，内容没有串到新文档=true"
+    },
+    {
+      "name": "sidebarReturnToWiki",
+      "ok": true,
+      "detail": "{\"type\":\"viewSnapshot\",\"id\":\"1790824912821\",\"sourceRel\":\"src/wiki-sidebar-probe.ts\",\"canCreate\":false,\"text\":\"#sidebar rapid-switch preservedwiki-sidebar-probe.ts\",\"overflow\":false,\"sessionId\":\"727352dd-abad-46f3-b28e-1d75cc2d3819\"}"
+    },
+    {
+      "name": "sidebarExternalUpdate",
+      "ok": true,
+      "detail": "外部 TextDocument 修改同步到侧栏=true"
+    },
+    {
+      "name": "sidebarHiddenResume",
+      "ok": true,
+      "detail": "隐藏侧栏后切换源文件，重新点击图标显示当前文件=true"
+    }
+  ],
+  "phase2": {
+    "trigger": "workspaceEdit.renameFile",
+    "docMoved": true,
+    "oldGone": true,
+    "linkRewritten": true,
+    "detail": "文档 .metadata/docs/src/___rename_probe__.go.wiki.md → .metadata/docs/deep/nested/___rename_probe__.go.wiki.md；链接 已重算；内容：# rename probe⏎⏎![x](../../../static/upload/2026-01-01/whatever.png)⏎"
+  }
+}

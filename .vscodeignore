@@ -1,0 +1,23 @@
+src/**
+test/**
+scripts/**
+docs/**
+.vscode/**
+.vscode-test/**
+node_modules/**
+out-tsc/**
+**/*.map
+**/*.ts
+!src/**/d.ts
+pnpm-lock.yaml
+pnpm-workspace.yaml
+tsconfig*.json
+vitest.config.ts
+esbuild.mjs
+.vscode-test.mjs
+*.vsix
+# 开发/交接文档，不随包发布（docs/** 已排除）
+AGENTS.md
+.gitignore
+
+dist/meta/**
